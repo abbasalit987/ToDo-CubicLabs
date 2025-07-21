@@ -110,7 +110,7 @@ npm run dev
 
 ## 👨‍💻 Author
 
-Built with ❤️ by [Your Name](https://github.com/your-username)
+Built with ❤️ by [Abbas Ali](https://github.com/abbasalit987)
 
 ---
 
