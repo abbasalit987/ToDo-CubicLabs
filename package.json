@@ -1,0 +1,20 @@
+{
+  "name": "todo-cubiclabs",
+  "version": "1.0.0",
+  "description": "A basic \"To-Do List\" application that can be accessed both via a web browser and potentially as a simple mobile app. The core functionality should allow users to add new tasks, mark tasks as complete, and view all tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abbasalit987/ToDo-CubicLabs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abbasalit987/ToDo-CubicLabs/issues"
+  },
+  "homepage": "https://github.com/abbasalit987/ToDo-CubicLabs#readme"
+}
