@@ -3,11 +3,11 @@ import './HomePage.css';
 import { ACTIONS, reducer, initialState } from '../../reducer/reducer';
 import TasksDisplay from '../TasksDisplay/TasksDisplay.jsx';
 import AddNewTask from '../AddNewTask/AddNewTask.jsx';
+import SideBarNav from '../SideBarNav/SideBarNav.jsx';
 
 const HomePage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [errorResponse, setErrorResponse] = useState(false);
-//   const [taskInfoOpen, setTaskInfoOpen] = useState(false);
 
   const today = new Date();
   const weekday = today.toLocaleDateString('en-GB', { weekday: 'long' });
@@ -16,6 +16,13 @@ const HomePage = () => {
     month: 'long',
     year: 'numeric'
   });
+
+  const handleNavBarItemSelect = (option) => {
+    dispatch({
+      type: ACTIONS.SET_SIDENAV,
+      payload: option
+    });
+  };
 
   useEffect(() => {
     console.log('State updated!', state);
@@ -32,6 +39,14 @@ const HomePage = () => {
           An error occurred while fetching tasks.
         </div>
       )}
+
+      <div className="sidebar-nav">
+        <SideBarNav 
+            sideNavSelected={state.sideNavSelected}
+            onSelect={handleNavBarItemSelect}
+            dispatch={dispatch}
+        />
+      </div>
 
       <div className="home-page">
         <h1 className="homepage-title">My Day</h1>

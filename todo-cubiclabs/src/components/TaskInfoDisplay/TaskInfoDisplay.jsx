@@ -1,5 +1,5 @@
 import React from "react";
-import "./TaskInfoDisplay.css"; // optional styling
+import "./TaskInfoDisplay.css";
 
 const TaskInfoDisplay = (props) => {
     const { task, onClose } = props;
@@ -12,7 +12,6 @@ const TaskInfoDisplay = (props) => {
         <p><strong>Status:</strong> {task.completed ? "Completed" : "Pending"}</p>
         <p><strong>Important:</strong> {task.priority ? "Yes" : "No"}</p>
         <p><strong>Task ID:</strong> {task.id}</p>
-        {/* Add more fields here as needed */}
         </div>
     );
 };

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { ACTIONS } from "../../reducer/reducer";
 
 const AddNewTask = (props) => {
-    const [taskText, setTaskText] = useState("");
-    const [placeholder, setPlaceholder] = useState("Add a task");
+  const [taskText, setTaskText] = useState("");
+  const [placeholder, setPlaceholder] = useState("Add a task");
 
-    const dispatch = props.dispatch;
-    const sideNavOption = props.sideNavOption;
+  const dispatch = props.dispatch;
+  const sideNavOption = props.sideNavOption;
 
   // 🔧 ID generator helper
   const generateTaskId = () => {
     const now = new Date();
-    const pad = (n) => n.toString().padStart(2, '0');
+    const pad = (n) => n.toString().padStart(2, "0");
 
     const day = pad(now.getDate());
     const month = pad(now.getMonth() + 1); // months are 0-based
@@ -34,7 +34,8 @@ const AddNewTask = (props) => {
         title: trimmed,
         description: "",
         completed: false,
-        priority: sideNavOption
+        priority: sideNavOption === false,
+        createdDate: new Date().toISOString(),
       },
     });
 
@@ -54,7 +55,9 @@ const AddNewTask = (props) => {
         type="text"
         value={taskText}
         placeholder={placeholder}
-        onFocus={() => setPlaceholder("Try typing - Pay the utility bill by 6pm Friday")}
+        onFocus={() =>
+          setPlaceholder("Try typing - Pay the utility bill by 6pm Friday")
+        }
         onBlur={() =>
           placeholder.trim() === "" || taskText === ""
             ? setPlaceholder("Add a task")
