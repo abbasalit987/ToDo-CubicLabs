@@ -1,0 +1,13 @@
+.side-bar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.cubic-labs-logo {
+  height: 150px;
+}
+
+.side-bar-nav-item {
+  display: flex;
+  align-items: center;
+}

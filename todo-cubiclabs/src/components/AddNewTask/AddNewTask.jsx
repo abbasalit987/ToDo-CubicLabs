@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ACTIONS } from "../../reducer/reducer";
+import "./AddNewTask.css";
 
 const AddNewTask = (props) => {
   const [taskText, setTaskText] = useState("");
@@ -52,11 +53,12 @@ const AddNewTask = (props) => {
   return (
     <div className="add-new-task">
       <input
+        className="add-task-input"
         type="text"
         value={taskText}
         placeholder={placeholder}
         onFocus={() =>
-          setPlaceholder("Try typing - Pay the utility bill by 6pm Friday")
+          setPlaceholder("Try typing 'Pay the utility bill by Friday 6pm'")
         }
         onBlur={() =>
           placeholder.trim() === "" || taskText === ""

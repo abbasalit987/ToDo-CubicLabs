@@ -1,0 +1,21 @@
+.tasks-display {
+  height: 65vh;                  /* ✅ Set your fixed height here */
+  overflow-y: auto;               /* ✅ Enable vertical scrolling when needed */
+  scroll-behavior: smooth;
+  padding-right: 4px;
+  min-height: 0;                  /* Flex-safe */
+
+  /* Optional smooth scrollbar transitions */
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Optional: WebKit scrollbars */
+.tasks-display::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tasks-display::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 200, 200, 0.3);
+  border-radius: 3px;
+}

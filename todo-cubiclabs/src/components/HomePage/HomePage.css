@@ -1,3 +1,58 @@
-.homepage-title{
-    margin: 0;
+.homepage-body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  background-color: #252423;
+  color: #ffffff;
+}
+
+.sidebar-nav {
+  width: 250px;
+  background-color: #252423;
+  padding: 20px;
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding: 30px;
+
+  background-image: url('../../assets/home-page-bg-img.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-top-left-radius: 1%;
+  border-bottom-left-radius: 1%;
+}
+
+.upper-home-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background-color: rgba(48, 48, 48, 0.8);
+  padding-left: 8px;
+  border-radius: 10px;
+}
+
+.homepage-title {
+  margin: 0;
+}
+
+.task-list {
+  flex-grow: 1;
+  overflow: hidden; /* Contains internal scroll behavior */
+  display: flex;
+  flex-direction: column;
 }

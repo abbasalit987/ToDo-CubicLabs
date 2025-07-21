@@ -29,7 +29,7 @@ const TasksDisplay = (props) => {
   });
 
   return (
-    <>
+    <div className='tasks-display'>
       {taskList.length > 0 ? (
         taskList.map((task) => (
           <TaskItem
@@ -43,7 +43,7 @@ const TasksDisplay = (props) => {
           No tasks available for this category.
         </div>
       )}
-    </>
+    </div>
   );
 };
 

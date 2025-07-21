@@ -1,0 +1,101 @@
+.task-info-display {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  padding-inline: 32px;
+  font-size: 1em;
+}
+
+.task-id-copy-row {
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  font-size: small;
+  margin-bottom: 10px;
+}
+
+.task-id {
+  padding-right: 5px;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.2s ease;
+}
+
+.copy-icon:hover {
+  color: #fff;
+}
+
+.copy-feedback {
+  margin-left: 8px;
+  color: #4caf50;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.task-description-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.description-text {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+
+.task-description-area {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  resize: vertical; /* or none, both work */
+  font-size: 1rem;
+  color: #fff;
+  padding: 6px 0;
+  font-family: inherit;
+
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* Firefox */
+}
+
+
+.modification-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.edit-button,
+.delete-button,
+.done-button {
+  cursor: pointer;
+  padding: 6px;
+  margin-left: 8px;
+  color: #aaa;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.edit-button:hover {
+  color: #78bafd;
+}
+
+.delete-button:hover {
+  color: #f44336;
+}
+
+.done-button:hover {
+  color: #4caf50;
+}
+
+.description-text {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 8px;
+  white-space: pre-wrap; /* ✅ Preserve newlines and wrapping */
+}

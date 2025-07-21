@@ -2,63 +2,61 @@ import React, { useState, useEffect } from "react";
 import { ACTIONS } from "../../reducer/reducer";
 import "./TaskInfoDisplay.css";
 
+// Material UI Icons
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DoneIcon from '@mui/icons-material/Done';
+
 const TaskInfoDisplay = ({ task, onClose, dispatch }) => {
   if (!task) return null;
 
-  const [editedTitle, setEditedTitle] = useState(task.title);
-  const [isEditingTitle, setIsEditingTitle] = useState(false);
-
   const [editedDescription, setEditedDescription] = useState(task.description || "");
   const [isEditingDescription, setIsEditingDescription] = useState(!task.description);
+  const [copied, setCopied] = useState(false);
 
-  // ✅ Run only when completed or priority changes
+  // Watch status changes
   useEffect(() => {
-    console.log("✅ Task status changed:");
-    console.log("Completed:", task.completed);
-    console.log("Priority:", task.priority);
+    console.log("✅ Task status changed:", {
+      completed: task.completed,
+      priority: task.priority
+    });
   }, [task.completed, task.priority]);
 
-  // 👉 Title handlers
-  const handleTitleChange = (e) => setEditedTitle(e.target.value);
-
-  const handleSaveTitle = () => {
-    const trimmedTitle = editedTitle.trim();
-    dispatch({
-      type: ACTIONS.UPDATE_TASK,
-      payload: {
-        ...task,
-        title: trimmedTitle,
-      },
+  // Copy to clipboard
+  const handleCopyTaskId = () => {
+    navigator.clipboard.writeText(task.id).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
     });
-
-    if (trimmedTitle === "") {
-      setIsEditingTitle(true); // stay editing if empty
-    } else {
-      setIsEditingTitle(false);
-    }
   };
 
-  const handleTitleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSaveTitle();
-    }
+  // Delete task
+  const handleDeleteTask = () => {
+    dispatch({
+      type: ACTIONS.DELETE_TASK,
+      payload: task.id,
+    });
+    onClose(); // Optional: Close the details panel
   };
 
-  const handleClickTitle = () => {
-    setIsEditingTitle(true);
+  // Edit/Save description
+  const handleEditDescriptionClick = () => {
+    setIsEditingDescription(true);
   };
 
-  // 👉 Description handlers
-  const handleEditDescriptionClick = () => setIsEditingDescription(true);
-
-  const handleDescriptionChange = (e) => setEditedDescription(e.target.value);
+  const handleDescriptionChange = (e) => {
+    setEditedDescription(e.target.value);
+  };
 
   const handleSaveDescription = () => {
     const trimmed = editedDescription.trim();
     dispatch({
       type: ACTIONS.UPDATE_TASK,
-      payload: { ...task, description: trimmed },
+      payload: {
+        ...task,
+        description: trimmed
+      },
     });
 
     if (trimmed === "") {
@@ -75,57 +73,19 @@ const TaskInfoDisplay = ({ task, onClose, dispatch }) => {
     }
   };
 
-  // ✅ Status toggles
-  const handleToggleImportant = () => {
-    dispatch({
-      type: ACTIONS.UPDATE_TASK,
-      payload: { ...task, priority: !task.priority },
-    });
-  };
-
-  const handleToggleCompleted = () => {
-    dispatch({
-      type: ACTIONS.UPDATE_TASK,
-      payload: { ...task, completed: !task.completed },
-    });
-  };
-
   return (
     <div className="task-info-display">
-      <button className="close-btn" onClick={onClose}>✖</button>
 
-      {/* ✅ Title Section */}
-      <div className="task-title-section">
-        {isEditingTitle ? (
-          <input
-            type="text"
-            value={editedTitle}
-            onChange={handleTitleChange}
-            onKeyDown={handleTitleKeyDown}
-            onBlur={handleSaveTitle}
-            placeholder="Task title"
-            className="task-title-input"
-            autoFocus
-          />
-        ) : (
-          <h2 className="task-title-view" onClick={handleClickTitle}>
-            {task.title || "Untitled Task (Click to edit)"}
-          </h2>
-        )}
-      </div>
-
-      {/* 💡 Task ID + Status Controls */}
-      <p><strong>Task ID:</strong> {task.id}</p>
-
-      <div className="task-info-controls">
-        <input
-          type="checkbox"
-          checked={task.completed}
-          onChange={handleToggleCompleted}
+      {/* ✅ Task ID with Copy */}
+      <div className="task-id-copy-row">
+        <span className="task-id">#{task.id}</span>
+        <ContentCopyIcon
+          fontSize="small"
+          className="copy-icon"
+          titleAccess="Copy Task ID"
+          onClick={handleCopyTaskId}
         />
-        <button onClick={handleToggleImportant}>
-          {task.priority ? "★" : "☆"}
-        </button>
+        {copied && <span className="copy-feedback">Copied!</span>}
       </div>
 
       {/* ✅ Description Section */}
@@ -140,19 +100,34 @@ const TaskInfoDisplay = ({ task, onClose, dispatch }) => {
             autoFocus
           />
         ) : (
-          <div>
-            <p className="description-text">
-              {task.description || <i>No description</i>}
-            </p>
-            <button
-              onClick={handleEditDescriptionClick}
-              className="edit-description-button"
-            >
-              ✏️ Edit Description
-            </button>
+          <div className="description-text">
+            {task.description || <i>No description</i>}
           </div>
         )}
       </div>
+
+      {/* ✅ Buttons */}
+      <div className="modification-buttons">
+        {isEditingDescription ? (
+          <DoneIcon
+            className="done-button"
+            onClick={handleSaveDescription}
+            titleAccess="Save description"
+          />
+        ) : (
+          <EditIcon
+            className="edit-button"
+            onClick={handleEditDescriptionClick}
+            titleAccess="Edit description"
+          />
+        )}
+        <DeleteIcon
+          className="delete-button"
+          onClick={handleDeleteTask}
+          titleAccess="Delete task"
+        />
+      </div>
+
     </div>
   );
 };
