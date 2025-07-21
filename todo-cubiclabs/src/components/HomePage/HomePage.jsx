@@ -55,6 +55,7 @@ const HomePage = () => {
         <div className="task-list">
           {state.tasks.length > 0 ? (
             <TasksDisplay
+              dispatch={dispatch}
               tasks={state.tasks}
               sideNavOption={state.sideNavSelected}
             />

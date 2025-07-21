@@ -3,7 +3,8 @@ import { ACTIONS } from "../../reducer/reducer";
 import TaskInfoDisplay from "../TaskInfoDisplay/TaskInfoDisplay";
 import "./TaskItem.css";
 
-const TaskItem = ({ taskDetails, dispatch }) => {
+const TaskItem = (props) => {
+  const { taskDetails, dispatch } = props;
   const [showInfo, setShowInfo] = useState(false);
 
   // ✅ Listen to state updates like a 'watch'
@@ -72,7 +73,7 @@ const TaskItem = ({ taskDetails, dispatch }) => {
 
       {/* ✅ Reactively rendered based on state */}
       {showInfo && (
-        <TaskInfoDisplay task={taskDetails} onClose={handleCloseInfo} />
+        <TaskInfoDisplay dispatch={dispatch} task={taskDetails} onClose={handleCloseInfo} />
       )}
     </div>
   );
