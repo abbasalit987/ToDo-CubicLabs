@@ -7,6 +7,7 @@ import AddNewTask from '../AddNewTask/AddNewTask.jsx';
 const HomePage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [errorResponse, setErrorResponse] = useState(false);
+//   const [taskInfoOpen, setTaskInfoOpen] = useState(false);
 
   const today = new Date();
   const weekday = today.toLocaleDateString('en-GB', { weekday: 'long' });
@@ -16,15 +17,13 @@ const HomePage = () => {
     year: 'numeric'
   });
 
-  // ✅ Refresh logic: runs on every state update
   useEffect(() => {
     console.log('State updated!', state);
 
-    // Example: store to localStorage
     localStorage.setItem('tasks', JSON.stringify(state.tasks));
     localStorage.setItem('selectedView', state.sideNavSelected);
 
-  }, [state]); // <- re-run when state changes
+  }, [state]);
 
   return (
     <>
@@ -45,8 +44,14 @@ const HomePage = () => {
               sideNavOption={state.sideNavSelected}
             />
           ) : (
-            <AddNewTask dispatch={dispatch} />
+            <div className="no-tasks-message">
+              No tasks available for this category.
+            </div>  
           )}
+          <AddNewTask 
+              dispatch={dispatch} 
+              sideNavOption={state.sideNavSelected}
+            />
         </div>
       </div>
     </>

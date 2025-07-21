@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { ACTIONS } from "../../reducer/reducer";
 
-const AddNewTask = ({ dispatch }) => {
-  const [taskText, setTaskText] = useState("");
-  const [placeholder, setPlaceholder] = useState("Add a task");
+const AddNewTask = (props) => {
+    const [taskText, setTaskText] = useState("");
+    const [placeholder, setPlaceholder] = useState("Add a task");
+
+    const dispatch = props.dispatch;
+    const sideNavOption = props.sideNavOption;
 
   // 🔧 ID generator helper
   const generateTaskId = () => {
@@ -24,11 +28,13 @@ const AddNewTask = ({ dispatch }) => {
     if (!trimmed) return;
 
     dispatch({
-      type: 'ADD_TASK',
+      type: ACTIONS.ADD_TASK,
       payload: {
         id: generateTaskId(),
         title: trimmed,
+        description: "",
         completed: false,
+        priority: sideNavOption
       },
     });
 
